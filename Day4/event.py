@@ -27,6 +27,13 @@ class Event:
         return event
 
 
+    def GetGuardID(self):
+        if (self.type == 0):
+            return int(self.action[1][1:])
+        else:
+            return -1
+
+
     def __lt__(self, other):
         return self.occurred_on < other.occurred_on
     

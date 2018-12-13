@@ -22,7 +22,7 @@ def main():
     current_shift = Shift()
     for e in events:
         if e.type == 0:
-            tmp_guard = Guard(int(e.action[1][1:]))
+            tmp_guard = Guard(e.GetGuardID())
             if len(guards) > 0:
                 guards[current_guard_id].add_shift(current_shift)
                 current_shift = Shift()
@@ -45,21 +45,27 @@ def main():
             highest = slept
             result_guard = g
 
-    # Find most slept minute
-    highest = 0
-    most_slept_minute = 0
-    
-    for i in range(len(result_guard.minutes_asleep)):
-        if result_guard.minutes_asleep[i] > highest:
-            highest = result_guard.minutes_asleep[i]
-            most_slept_minute = i
+    # Most slept minute
+    msm = result_guard.get_most_slept_minute()
 
     # Part 1 Answer
     print("Guard #", result_guard.id, sep='')
-    print("Slept most at minute", most_slept_minute)
-    print("Part 1 Answer:", result_guard.id * most_slept_minute)
+    print("Slept most at minute", msm)
+    print("Part 1 Answer:", result_guard.id * msm)
+
+    print()
 
     # Part 2 Answer
+    highest_count = -1
+    for g in guards:
+        msm_count = g.minutes_asleep[g.get_most_slept_minute()]
+        if msm_count > highest_count:
+            result_guard = g
+            highest_count = msm_count
+    
+    print("Guard #", result_guard.id, sep='')
+    print("Slept most at minute ", result_guard.get_most_slept_minute(), ', ', msm_count, ' times', sep='')
+    print("Part 2 Answer:", result_guard.id * result_guard.get_most_slept_minute())
 
 
 main()

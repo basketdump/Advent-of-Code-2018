@@ -14,6 +14,17 @@ class Guard:
         self.minutes_asleep = [sum(pair) for pair in zip(self.minutes_asleep, shift.minutes_asleep())]
 
 
+    def get_most_slept_minute(self):
+        highest = -1
+        most_slept_minute = -1
+
+        for i in range(len(self.minutes_asleep)):
+            if self.minutes_asleep[i] > highest:
+                highest = self.minutes_asleep[i]
+                most_slept_minute = i
+        return most_slept_minute
+
+
     def __eq__(self, other):
         return self.id == other.id
     
