@@ -1,7 +1,7 @@
 from event import Event
 from shift import Shift
 from guard import Guard
-from algorithms import binary_insert, binary_search
+from algorithms import binary_insert, binary_search, index_of_max
 
 
 def main():
@@ -27,7 +27,6 @@ def main():
                 guards[current_guard_id].add_shift(current_shift)
                 current_shift = Shift()
                 
-                # TODO: Clean up nasty ass split
                 index = binary_search(guards, tmp_guard)
                 if index == -1:
                     current_guard_id = binary_insert(guards, tmp_guard)
@@ -38,34 +37,25 @@ def main():
         current_shift.add_event(e)
     
     # Find guard who slept most
-    highest = 0
-    for g in guards:
-        slept = sum(g.minutes_asleep)
-        if  slept > highest:
-            highest = slept
-            result_guard = g
+    result_index = index_of_max([sum(g.minutes_asleep) for g in guards])
 
     # Most slept minute
-    msm = result_guard.get_most_slept_minute()
+    msm = guards[result_index].get_most_slept_minute()
 
     # Part 1 Answer
-    print("Guard #", result_guard.id, sep='')
+    print("Guard #", guards[result_index].id, sep='')
     print("Slept most at minute", msm)
-    print("Part 1 Answer:", result_guard.id * msm)
+    print("Part 1 Answer:", guards[result_index].id * msm)
 
     print()
 
     # Part 2 Answer
-    highest_count = -1
-    for g in guards:
-        msm_count = g.minutes_asleep[g.get_most_slept_minute()]
-        if msm_count > highest_count:
-            result_guard = g
-            highest_count = msm_count
+    msm_count = [g.minutes_asleep[g.get_most_slept_minute()] for g in guards]
+    result_index = index_of_max(msm_count)
     
-    print("Guard #", result_guard.id, sep='')
-    print("Slept most at minute ", result_guard.get_most_slept_minute(), ', ', msm_count, ' times', sep='')
-    print("Part 2 Answer:", result_guard.id * result_guard.get_most_slept_minute())
+    print("Guard #", guards[result_index].id, sep='')
+    print("Slept most at minute ", guards[result_index].get_most_slept_minute(), ', ', msm_count[result_index], ' times', sep='')
+    print("Part 2 Answer:", guards[result_index].id * guards[result_index].get_most_slept_minute())
 
 
 main()

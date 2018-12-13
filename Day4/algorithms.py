@@ -33,3 +33,15 @@ def binary_insert(array, element):
 
     array.insert(mid, element)
     return mid
+
+
+def index_of_max(elements):
+    highest = -1
+    index = -1
+    for i in range(len(elements)):
+        current = elements[i]
+        if current > highest:
+            highest = current
+            index = i
+
+    return index
