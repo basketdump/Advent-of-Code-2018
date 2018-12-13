@@ -52,10 +52,11 @@ def main():
     # Part 2 Answer
     msm_count = [g.minutes_asleep[g.get_most_slept_minute()] for g in guards]
     result_index = index_of_max(msm_count)
+    msm = guards[result_index].get_most_slept_minute()
     
     print("Guard #", guards[result_index].id, sep='')
-    print("Slept most at minute ", guards[result_index].get_most_slept_minute(), ', ', msm_count[result_index], ' times', sep='')
-    print("Part 2 Answer:", guards[result_index].id * guards[result_index].get_most_slept_minute())
+    print("Slept most at minute ", msm, ', ', msm_count[result_index], ' times', sep='')
+    print("Part 2 Answer:", guards[result_index].id * msm)
 
 
 main()
