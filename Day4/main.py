@@ -1,13 +1,14 @@
+import sys
 from event import Event
 from shift import Shift
 from guard import Guard
 from algorithms import binary_insert, binary_search, index_of_max
 
 
-def main():
+def main(input_file):
     # Load input as events in sorted order (Event timestamp)
     events = []
-    with open('input.txt') as file:
+    with open(input_file) as file:
         for line in file:
             # TODO: Binary insert based off datetime instead of append
             e = Event(line)
@@ -59,4 +60,4 @@ def main():
     print("Part 2 Answer:", guards[result_index].id * msm)
 
 
-main()
+main(sys.argv[1])
