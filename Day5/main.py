@@ -19,11 +19,14 @@ def main(input_file):
     # Part 2
     #
     shortest_poly = None
+
+    # Go through each type, aka, letter and remove it from our temporary polymer
     for c in range(ord('a'), ord('z')+1):
         tmp = Polymer(input_string)
         tmp.remove_type(chr(c))
         tmp.react()
 
+        # If temporary polymer is shorter than shortest length found yet, updated our shortest_poly
         if shortest_poly is None or tmp.length() < shortest_poly:
             shortest_poly = tmp.length()
     
