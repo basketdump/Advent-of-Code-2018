@@ -1,11 +1,14 @@
 import sys
-from polymer import Polymer
+from time import time
+from string import ascii_lowercase
+from polymer_v3 import Polymer
 
 
 def main(input_file):
     with open(input_file) as f:
         input_string = f.readline().strip()
     
+    start = time()
     # 
     # Part 1
     #
@@ -21,9 +24,9 @@ def main(input_file):
     shortest_poly = None
 
     # Go through each type, aka, letter and remove it from our temporary polymer
-    for c in range(ord('a'), ord('z')+1):
+    for c in ascii_lowercase:
         tmp = Polymer(input_string)
-        tmp.remove_type(chr(c))
+        tmp.remove_type(c)
         tmp.react()
 
         # If temporary polymer is shorter than shortest length found yet, updated our shortest_poly
@@ -31,6 +34,7 @@ def main(input_file):
             shortest_poly = tmp.length()
     
     print('Shortest possible altered polymer:', shortest_poly)
-
+    end = time()
+    print("Seconds:", (end - start))
 
 main(sys.argv[1])

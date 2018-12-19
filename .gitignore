@@ -16,3 +16,8 @@ Day5/.idea/modules.xml
 Day5/.idea/vcs.xml
 Day5/.idea/workspace.xml
 Day5/__pycache__/polymer.cpython-37.pyc
+Day5/__pycache__/polymer_alternate.cpython-37.pyc
+Day5/__pycache__/polymer_v4.cpython-37.pyc
+Day5/__pycache__/polymer_v3.cpython-37.pyc
+Day5/polymer_v4.py
+Day5/main_v2.py

@@ -28,9 +28,6 @@ class Polymer:
     def is_polar(self, u1, u2):
         """ Checks to see if unit 1 and unit 2 are polar opposites of same type """
         # Polarity is defined by the same letter type but differing case
-        # ASCII difference of a lower and capital version of the same letter is 32
-        # This returns true if the difference of unit 1 and unit 2 is 32 (same letter type, different case)
-        # return abs(ord(u1) - ord(u2)) == 32
         return u1.lower() == u2.lower() and (u1 != u2)
 
     def length(self):
